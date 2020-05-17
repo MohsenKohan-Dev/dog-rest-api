@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Dog {
@@ -62,5 +63,21 @@ public class Dog {
 
     public void setOrigin(String origin) {
         this.origin = origin;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dog dog = (Dog) o;
+        return Objects.equals(id, dog.id) &&
+                Objects.equals(name, dog.name) &&
+                Objects.equals(breed, dog.breed) &&
+                Objects.equals(origin, dog.origin);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, breed, origin);
     }
 }
